@@ -2,30 +2,35 @@
 using MimeKit;
 using SBTCv3.Models;
 using MailKit.Net.Smtp;
-
+using Microsoft.Extensions.Options;
+using SBTCv3.Models.Mail;
 
 namespace SBTCv3.Controllers
 {
     public class SendMailController : Controller
     {
-        private readonly Models.Mail.MailSettings _mailSettings;
+        public readonly MailSettings _mailSettings;
+        public SendMailController(IOptions<MailSettings> options)
+        {
+            _mailSettings = options.Value;
+        }
         public IActionResult SendMail()
         {
             return View();
         }
 
         [HttpPost]
-        public IActionResult SendMail(IMail mail, string userEmail)
+        public IActionResult SendMail([FromForm] string userEmail)
         {
+            var email = new Email();
             try
             {
                 MimeMessage emailMessage = new MimeMessage();
 
-
-                MailboxAddress emailFrom = new MailboxAddress(_mailSettings.DisplayName, _mailSettings.Mail);
+                MailboxAddress emailFrom = new MailboxAddress("Uỷ ban vé tàu ABC", "kidsclothesfree@gmail.com");
                 emailMessage.From.Add(emailFrom);
 
-                MailboxAddress emailTo = new MailboxAddress(mail.username, mail.email);
+                MailboxAddress emailTo = new MailboxAddress("nhatnt2406@gmail.com", "nhatnt2406@gmail.com");
                 emailMessage.To.Add(emailTo);
 
                 emailMessage.Subject = "Thông báo đặt vé thành công!";
@@ -34,23 +39,24 @@ namespace SBTCv3.Controllers
                 string EmailTemplateText = System.IO.File.ReadAllText(FilePath);
 
 
-                EmailTemplateText = string.Format(EmailTemplateText, userEmail);
+                EmailTemplateText = string.Format(EmailTemplateText, "1", "2", "3", "4", "5", "6");
 
                 BodyBuilder emailBodyBuilder = new BodyBuilder();
                 emailBodyBuilder.HtmlBody = EmailTemplateText;
                 emailMessage.Body = emailBodyBuilder.ToMessageBody();
 
                 SmtpClient emailClient = new SmtpClient();
-                emailClient.Connect(_mailSettings.Host, _mailSettings.Port);
-                emailClient.Authenticate(_mailSettings.Mail, _mailSettings.Password);
+                emailClient.Connect("smtp.gmail.com", 587);
+                emailClient.Authenticate("kidsclothesfree@gmail.com", "eetgdqcqjypcwnmu");
                 emailClient.Send(emailMessage);
                 emailClient.Disconnect(true);
-                emailClient.Dispose();                
+                emailClient.Dispose();
             }
             catch (Exception ex)
             {
                 //Log Exception Details
-                return Ok(ex);
+                throw ex;
+
             }
 
             return View();
