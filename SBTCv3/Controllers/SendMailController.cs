@@ -30,7 +30,7 @@ namespace SBTCv3.Controllers
                 MailboxAddress emailFrom = new MailboxAddress("Uỷ ban vé tàu ABC", "kidsclothesfree@gmail.com");
                 emailMessage.From.Add(emailFrom);
 
-                MailboxAddress emailTo = new MailboxAddress("nhatnt2406@gmail.com", "nhatnt2406@gmail.com");
+                MailboxAddress emailTo = new MailboxAddress("duyoccho", userEmail);
                 emailMessage.To.Add(emailTo);
 
                 emailMessage.Subject = "Thông báo đặt vé thành công!";
@@ -39,7 +39,7 @@ namespace SBTCv3.Controllers
                 string EmailTemplateText = System.IO.File.ReadAllText(FilePath);
 
 
-                EmailTemplateText = string.Format(EmailTemplateText, "1", "2", "3", "4", "5", "6");
+                EmailTemplateText = string.Format(EmailTemplateText, "1", "2", "3", "4", "5", "6","7","8");
 
                 BodyBuilder emailBodyBuilder = new BodyBuilder();
                 emailBodyBuilder.HtmlBody = EmailTemplateText;
