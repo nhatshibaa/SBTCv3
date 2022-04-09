@@ -40,7 +40,7 @@ namespace SBTCv3.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("createTime")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("string");
 
                     b.Property<DateTime>("exprired")
                         .HasColumnType("datetime2");

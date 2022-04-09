@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using SBTCv3.Data;
 using SBTCv3.Models;
+using System.Diagnostics;
 
 namespace SBTCv3.Controllers
 {
@@ -31,6 +32,21 @@ namespace SBTCv3.Controllers
         public IActionResult CartCreate()
         {
             return View("~/Views/Admin/Carts/Create.cshtml");
+        }
+        // POST: Carts/Create
+        // To protect from overposting attacks, enable the specific properties you want to bind to.
+        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> CartCreate([Bind("Id,Email,IdentityCard,idTicket,Quantity,createTime,exprired")] Cart cart)
+        {
+            if (ModelState.IsValid)
+            {
+                _context.Add(cart);
+                await _context.SaveChangesAsync();
+                return View("~/Views/Admin/Carts/Index.cshtml", await _context.Cart.ToListAsync());
+            }
+            return View("~/Views/Admin/Carts/Details.cshtml", cart);
         }
         public async Task<IActionResult> CartDetails(int? id)
         {

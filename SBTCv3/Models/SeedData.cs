@@ -35,9 +35,9 @@ namespace SBTCv3.Models
                     new Ticket
                     {
                         name = "Vé tàu C04",
-                        startLocation = "Hà nội",
+                        startLocation = "Hồ Chí Minh",
                         endLocation = "Hải dương",
-                        price = 10,
+                        price = 1000,
                         quantity = 12,
                         Time = "04/01/2021 10:00"
                     },
@@ -45,8 +45,8 @@ namespace SBTCv3.Models
                     new Ticket
                     {
                         name = "Vé tàu E11",
-                        startLocation = "Hà nội",
-                        endLocation = "Hải dương",
+                        startLocation = "Sài Gòn",
+                        endLocation = "Cà Mau",
                         price = 100,
                         quantity = 5,
                         Time = "28/07/2021 10:00"
@@ -56,7 +56,7 @@ namespace SBTCv3.Models
                     {
                         name = "Vé tàu G012",
                         startLocation = "Hà nội",
-                        endLocation = "Hải dương",
+                        endLocation = "Thái Bình",
                         price = 70,
                         quantity = 7,
                         Time = "24/06/2022 10:00"

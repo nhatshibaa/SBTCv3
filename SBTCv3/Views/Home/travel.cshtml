@@ -1,4 +1,7 @@
-﻿@*
+﻿@model IEnumerable<SBTCv3.Models.Ticket>
+@using SBTCv3.Controllers
+
+@*
     For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 *@
 @{
@@ -42,208 +45,86 @@
             <ul class="rout">
                 <li class="rou">Route</li>
                 <li class="ser">Start</li>
-                <li class="fir">End</li>
                 <li class="las">Fare</li>
                 <li class="dat"></li>
                 <div class="clearfix"></div>
             </ul>
             <!--- rou-secnd ---->
-            <ul class="rou-secnd animated wow fadeInUp animated" data-wow-duration="1200ms" data-wow-delay="500ms"
+            @foreach (var item in Model)
+            {
+                <div class="modal fade" id="@Html.DisplayFor(modelItem => item.id)" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <section>
+                                <div class="modal-body modal-spa">
+                                    <div class="writ">
+                                        <h4>Ticket Information</h4>
+                                        <form asp-controller="SendMail" asp-action="SendMail" method="post">
+                                            <table>
+                                                <tr style="line-height: 50px">
+                                                    <td>
+                                                        <strong>Email:</strong>
+                                                    </td>
+                                                    <td style="padding-left: 150px"></td>
+                                                    <td>
+                                                        <input type="email" name="email" />
+                                                    </td>
+                                                </tr>
+                                                <tr style="line-height: 50px">
+                                                    <td>
+                                                        <strong>Identity Card</strong>
+                                                    </td>
+                                                    <td style="padding-left: 150px"></td>
+                                                    <td>
+
+                                                        <input type="text" name="identityCard" />
+                                                    </td>
+                                                </tr>
+                                                <tr style="line-height: 50px">
+                                                    <td>
+                                                        <strong>Quantity</strong>
+                                                    </td>
+                                                    <td style="padding-left: 150px"></td>
+                                                    <td>
+                                                        <input type="text" name="quantity" />
+                                                    </td>
+                                                </tr>
+                                            </table>
+                                            <div class="sub-bn">
+                                                 <form>
+                                                    <input class="subbtn" type="submit" value="Submit"/>
+                                                </form>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </section>
+                        </div>
+                    </div>
+                </div>
+                <ul class="rou-secnd animated wow fadeInUp animated" data-wow-duration="1200ms" data-wow-delay="500ms"
                 style="visibility: visible; animation-duration: 1200ms; animation-delay: 500ms; animation-name: fadeInUp;">
-                <li class="rou">
-                    <h4>Hà Nội</h4>
-                    <p>Hải Dương</p>
-                </li>
-                <li class="ser">
-                    <p>8:00 AM</p>
-                </li>
-                <li class="fir">
-                    <p>10:00 AM</p>
-                </li>
-                <li class="las">
-                    <p>100$</p>
-                </li>
-                <li class="dat">
-                    <a asp-action="#" class="det" data-toggle="modal" data-target="#modalTicket" >Buy</a>
-                </li>
-                <div class="clearfix"></div>
-            </ul>
-            <!--- /rou-secnd ---->
-            <!--- rou-secnd ---->
-            <ul class="rou-secnd animated wow fadeInUp animated" data-wow-duration="1200ms" data-wow-delay="500ms"
-                style="visibility: visible; animation-duration: 1200ms; animation-delay: 500ms; animation-name: fadeInUp;">
-                <li class="rou">
-                    <h4>Hà Nội</h4>
-                    <p>Hải Dương</p>
-                </li>
-                <li class="ser">
-                    <p>8:00 AM</p>
-                </li>
-                <li class="fir">
-                    <p>10:00 AM</p>
-                </li>
-                <li class="las">
-                    <p>100$</p>
-                </li>
-                <li class="dat">
-                    <a asp-controller="Home" asp-action="ticket" class="det">Buy</a>
-                </li>
-                <div class="clearfix"></div>
-            </ul>
-            <!--- /rou-secnd ---->
-            <!--- rou-secnd ---->
-            <ul class="rou-secnd animated wow fadeInUp animated" data-wow-duration="1200ms" data-wow-delay="500ms"
-                style="visibility: visible; animation-duration: 1200ms; animation-delay: 500ms; animation-name: fadeInUp;">
-                <li class="rou">
-                    <h4>Hà Nội</h4>
-                    <p>Hải Dương</p>
-                </li>
-                <li class="ser">
-                    <p>8:00 AM</p>
-                </li>
-                <li class="fir">
-                    <p>10:00 AM</p>
-                </li>
-                <li class="las">
-                    <p>100$</p>
-                </li>
-                <li class="dat">
-                    <a asp-controller="Home" asp-action="ticket" class="det">Buy</a>
-                </li>
-                <div class="clearfix"></div>
-            </ul>
-            <!--- /rou-secnd ---->
-            <!--- rou-secnd ---->
-            <ul class="rou-secnd animated wow fadeInUp animated" data-wow-duration="1200ms" data-wow-delay="500ms"
-                style="visibility: visible; animation-duration: 1200ms; animation-delay: 500ms; animation-name: fadeInUp;">
-                <li class="rou">
-                    <h4>Hà Nội</h4>
-                    <p>Hải Dương</p>
-                </li>
-                <li class="ser">
-                    <p>8:00 AM</p>
-                </li>
-                <li class="fir">
-                    <p>10:00 AM</p>
-                </li>
-                <li class="las">
-                    <p>100$</p>
-                </li>
-                <li class="dat">
-                    <a asp-controller="Home" asp-action="ticket" class="det">Buy</a>
-                </li>
-                <div class="clearfix"></div>
-            </ul>
-            <!--- /rou-secnd ---->
-            <!--- rou-secnd ---->
-            <ul class="rou-secnd animated wow fadeInUp animated" data-wow-duration="1200ms" data-wow-delay="500ms"
-                style="visibility: visible; animation-duration: 1200ms; animation-delay: 500ms; animation-name: fadeInUp;">
-                <li class="rou">
-                    <h4>Hà Nội</h4>
-                    <p>Hải Dương</p>
-                </li>
-                <li class="ser">
-                    <p>8:00 AM</p>
-                </li>
-                <li class="fir">
-                    <p>10:00 AM</p>
-                </li>
-                <li class="las">
-                    <p>100$</p>
-                </li>
-                <li class="dat">
-                    <a asp-controller="Home" asp-action="ticket" class="det">Buy</a>
-                </li>
-                <div class="clearfix"></div>
-            </ul>
-            <!--- /rou-secnd ---->
-            <!--- rou-secnd ---->
-            <ul class="rou-secnd animated wow fadeInUp animated" data-wow-duration="1200ms" data-wow-delay="500ms"
-                style="visibility: visible; animation-duration: 1200ms; animation-delay: 500ms; animation-name: fadeInUp;">
-                <li class="rou">
-                    <h4>Hà Nội</h4>
-                    <p>Hải Dương</p>
-                </li>
-                <li class="ser">
-                    <p>8:00 AM</p>
-                </li>
-                <li class="fir">
-                    <p>10:00 AM</p>
-                </li>
-                <li class="las">
-                    <p>100$</p>
-                </li>
-                <li class="dat">
-                    <a asp-controller="Home" asp-action="ticket" class="det">Buy</a>
-                </li>
-                <div class="clearfix"></div>
-            </ul>
-            <!--- /rou-secnd ---->
-            <!--- rou-secnd ---->
-            <ul class="rou-secnd animated wow fadeInUp animated" data-wow-duration="1200ms" data-wow-delay="500ms"
-                style="visibility: visible; animation-duration: 1200ms; animation-delay: 500ms; animation-name: fadeInUp;">
-                <li class="rou">
-                    <h4>Hà Nội</h4>
-                    <p>Hải Dương</p>
-                </li>
-                <li class="ser">
-                    <p>8:00 AM</p>
-                </li>
-                <li class="fir">
-                    <p>10:00 AM</p>
-                </li>
-                <li class="las">
-                    <p>100$</p>
-                </li>
-                <li class="dat">
-                    <a asp-controller="Home" asp-action="ticket" class="det">Buy</a>
-                </li>
-                <div class="clearfix"></div>
-            </ul>
-            <!--- /rou-secnd ---->
-            <!--- rou-secnd ---->
-            <ul class="rou-secnd animated wow fadeInUp animated" data-wow-duration="1200ms" data-wow-delay="500ms"
-                style="visibility: visible; animation-duration: 1200ms; animation-delay: 500ms; animation-name: fadeInUp;">
-                <li class="rou">
-                    <h4>Hà Nội</h4>
-                    <p>Hải Dương</p>
-                </li>
-                <li class="ser">
-                    <p>8:00 AM</p>
-                </li>
-                <li class="fir">
-                    <p>10:00 AM</p>
-                </li>
-                <li class="las">
-                    <p>100$</p>
-                </li>
-                <li class="dat">
-                    <a asp-controller="Home" asp-action="ticket" class="det">Buy</a>
-                </li>
-                <div class="clearfix"></div>
-            </ul>
-            <!--- /rou-secnd ---->
-            <!--- rou-secnd ---->
-            <ul class="rou-secnd animated wow fadeInUp animated" data-wow-duration="1200ms" data-wow-delay="500ms"
-                style="visibility: visible; animation-duration: 1200ms; animation-delay: 500ms; animation-name: fadeInUp;">
-                <li class="rou">
-                    <h4>Hà Nội</h4>
-                    <p>Hải Dương</p>
-                </li>
-                <li class="ser">
-                    <p>8:00 AM</p>
-                </li>
-                <li class="fir">
-                    <p>10:00 AM</p>
-                </li>
-                <li class="las">
-                    <p>100$</p>
-                </li>
-                <li class="dat">
-                    <a asp-controller="Home" asp-action="ticket" class="det">Buy</a>
-                </li>
-                <div class="clearfix"></div>
-            </ul>
+                    <li class="rou">
+                        <h4>@Html.DisplayFor(modelItem => item.startLocation)</h4>
+                        <p> @Html.DisplayFor(modelItem => item.endLocation)</p>
+                    </li>
+                    <li class="ser">
+                        <p>@Html.DisplayFor(modelItem => item.Time)</p>
+                    </li>
+                    <li class="las">
+                        <p>@Html.DisplayFor(modelItem => item.price)$</p>
+                    </li>
+                    <li class="dat">
+                        <a href="#" class="det" data-toggle="modal" data-target="#@Html.DisplayFor(modelItem => item.id)">Buy</a>
+                    </li>
+                    <div class="clearfix"></div>
+                </ul>
+            }
             <!--- /rou-secnd ---->
         </div>
     </div>

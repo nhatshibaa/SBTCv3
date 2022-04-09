@@ -1,4 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using SBTCv3.Data;
 using SBTCv3.Models;
 using System.Diagnostics;
 
@@ -6,12 +8,17 @@ namespace SBTCv3.Controllers
 {
     public class HomeController : Controller
     {
+        private readonly SBTCv3Context _context;
         private readonly ILogger<HomeController> _logger;
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(SBTCv3Context context, ILogger<HomeController> logger)
         {
+            _context = context;
             _logger = logger;
+
         }
+
+
 
         public IActionResult Index()
         {
@@ -44,10 +51,23 @@ namespace SBTCv3.Controllers
         {
             return View();
         }
-        public IActionResult travel()
+        public async Task<IActionResult> travel()
         {
-            return View();
+            return View(await _context.Ticket.ToListAsync());
         }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> CartCreate([Bind("Id,Email,IdentityCard,idTicket,Quantity,createTime,exprired")] Cart cart)
+        {
+            if (ModelState.IsValid)
+            {
+                _context.Add(cart);
+                await _context.SaveChangesAsync();
+                return View("~/Views/Admin/Carts/Index.cshtml", await _context.Cart.ToListAsync());
+            }
+            return View("~/Views/Home/travel.cshtml", cart);
+        }
+
 
         public IActionResult ticket()
         {

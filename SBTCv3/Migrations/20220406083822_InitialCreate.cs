@@ -19,7 +19,7 @@ namespace SBTCv3.Migrations
                     IdentityCard = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     idTicket = table.Column<int>(type: "int", nullable: false),
                     Quantity = table.Column<int>(type: "int", nullable: false),
-                    createTime = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    createTime = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     exprired = table.Column<DateTime>(type: "datetime2", nullable: false)
                 },
                 constraints: table =>
